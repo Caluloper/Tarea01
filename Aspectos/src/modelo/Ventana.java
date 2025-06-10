@@ -1,4 +1,4 @@
-package vista;
+package modelo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +25,7 @@ public class Ventana extends JFrame {
 		
 		botonRojo.addActionListener(e -> {
 			setColor(Color.RED);
+			System.out.println("Hola");
 		});
 		
 		botonVerde.addActionListener(e -> {
