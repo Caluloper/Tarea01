@@ -1,11 +1,14 @@
 package modelo;
-
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Ventana extends JFrame {
 	private JPanel panel;
 	private JButton botonRojo, botonVerde, botonAzul;
+	private List<Observer> observers = new ArrayList<>();
+	private Color color;
 	
 	public Ventana() {
 		setTitle("Cambiar Color");
@@ -25,7 +28,6 @@ public class Ventana extends JFrame {
 		
 		botonRojo.addActionListener(e -> {
 			setColor(Color.RED);
-			System.out.println("Hola");
 		});
 		
 		botonVerde.addActionListener(e -> {
@@ -41,5 +43,21 @@ public class Ventana extends JFrame {
 	
 	private void setColor(Color color) {
         panel.setBackground(color);
+        this.color = color;
+        notifyObservers();
+    }
+	
+	public void addObserver(Observer observer) {
+        observers.add(observer);
+    }
+	
+	public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+	
+	private void notifyObservers() {
+        for (Observer observer : observers) {
+            observer.update(color);
+        }
     }
 }
